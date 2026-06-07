@@ -1,16 +1,22 @@
-# Ex.No:5(C)  FILE HANDLING USING JAVA
+# Ex.No:5(D) THREAD PRIORITY
+
 ## QUESTION:
-Write a program to count the number of characters in a file.
+Write a java program for determine the priority and name of the current thread.
+
+Note : Read the threadname from the User
 
 ## AIM:
-To count and display the total number of characters in a file using FileReader.
+To read a thread name from the user and display the current thread’s name and priority.
 
 ## ALGORITHM :
-1.	Ask the user for the file name.
-2.	Open the file using FileReader.
-3.	Read each character one by one until the end of the file.
-4.	Increment a counter for each character read.
-5.	Display the total character count.
+1.	Read the thread name from the user.
+2.	Get the reference of the current thread using Thread.currentThread().
+3.	Set the name of the current thread using setName().
+4.	Retrieve the thread’s name and priority using getName() and getPriority().
+5.	Display both values.
+
+
+
 
 ## PROGRAM:
  ```
@@ -23,56 +29,38 @@ RegisterNumber: 212223230010
 
 ## SOURCE CODE:
 ```
-import java.io.*;
+import java.util.Scanner;
 
-public class FileCharacterCount {
+public class ThreadInfoExample {
     public static void main(String[] args) {
-        try {
-            // Use BufferedReader to read input
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(System.in);
 
-            // Read the text to write (assume file name is fixed)
-            String text = br.readLine();
+        // Read thread name from user
+        String threadName = scanner.nextLine();
 
-            // Use a fixed file name
-            String fileName = "output.txt";
+        // Create a thread with the given name
+        Thread t = new Thread(() -> {
+            // Thread work can go here if needed
+        }, threadName);
 
-            // Write text to file
-            try (FileWriter fw = new FileWriter(fileName)) {
-                if (text != null) {
-                    fw.write(text);
-                }
-            }
+        // Display priority and name
+        System.out.println("Priority of Thread: " + t.getPriority());
+        System.out.println("Name of Thread: " + t.getName());
 
-            // Count characters in file
-            int charCount = 0;
-            try (FileReader fr = new FileReader(fileName)) {
-                while (fr.read() != -1) {
-                    charCount++;
-                }
-            }
+        // Display full thread info (toString())
+        System.out.println(t);
 
-            System.out.println("Number of characters written to the file: " + charCount);
-
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        scanner.close();
     }
 }
-
 ```
 
-
-
-
-
-
 ## OUTPUT:
-<img width="1271" height="303" alt="image" src="https://github.com/user-attachments/assets/8417184e-b934-4c43-a19c-4bc7cec02f4e" />
+<img width="1313" height="265" alt="image" src="https://github.com/user-attachments/assets/f363db08-7cdb-4761-a39c-556870905f3c" />
 
 
 
 ## RESULT:
-The program successfully reads the file and prints the total number of characters present in it.
+The program successfully reads the thread name from the user and displays the current thread’s name and priority.
 
 
